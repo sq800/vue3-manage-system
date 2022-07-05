@@ -14,80 +14,161 @@
             </span>
         </div>
         <div class="navbar-right">
-            <!-- flex容器 -->
-            <div class="flex-box">
-                <span class="time">{{ year }}年{{ month }}月{{ day }}日{{ hour }}时{{ minute }}分{{ second }}秒 周{{ dayOfWeek }}</span>
-                <span class="fullScreen">全屏</span>
-                <span class="role">管理员</span>
-            </div>
+            <span class="time">{{ currentTimeString }}</span>
+            <button class="fullScreen">
+                <span @click="handleFullScreen">
+                    <el-icon>
+                        <FullScreen />
+                    </el-icon>
+                    全屏
+                </span>
+            </button>
+            <span class="role">管理员</span>
+
         </div>
     </header>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { get } from 'lodash'
+import { ref, isRef } from 'vue'
 
 // true 展开菜单  false 关闭菜单
 let menuStatus = ref(true);
 // 当前时间
-let dateTime = ref()
-
+let currentTimeString = ref("");
+getCurrent();
+// 每1秒获取一次时间
+let task = setInterval(getCurrent, 1000);
+// 获取当前时间
+function getCurrent() {
+    let d = new Date();
+    //拼接当前时间字符串
+    currentTimeString.value = d.getFullYear() + "年" + (d.getMonth() + 1) + "月" + d.getDate() + "日" + addZero(d.getHours()) + ":"
+        + addZero(d.getMinutes()) + ":" + addZero(d.getSeconds()) + " 周" + getDay();
+    //美观起见，不足十位补零
+    function addZero(i) {
+        if (i < 10) {
+            i = '0' + i;
+        }
+        return i;
+    }
+    // 获取到的周几，返回汉字
+    function getDay() {
+        switch (d.getDay()) {
+            case 1:
+                return "一";
+                break;
+            case 2:
+                return "二";
+                break;
+            case 3:
+                return "三";
+                break;
+            case 4:
+                return "四";
+                break;
+            case 5:
+                return "五";
+                break;
+            case 6:
+                return "六";
+                break;
+            default:
+                return "日"
+                break;
+        }
+    }
+}
+//向父组件传参
+const emit = defineEmits(["my-click"]);
 // 展开/关闭处理函数
 function handleCollapse() {
     menuStatus.value = !menuStatus.value;
+    emit("my-click", menuStatus.value);
 }
+let fullScreen = false;
+function handleFullScreen() {
+    let element = document.documentElement;
+    if (fullScreen) {
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    } else {
+        if (element.requestFullscreen) {
+            element.requestFullscreen();
+        } else if (element.webkitRequestFullScreen) {
+            element.webkitRequestFullScreen();
+        } else if (element.mozRequestFullScreen) {
+            element.mozRequestFullScreen();
+        } else if (element.msRequestFullscreen) { }
+    }
+    fullScreen = !fullScreen
 
+}
 </script>
-<style>
-* {
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    position: fixed;
+<style lang="less">
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
     height: 50px;
-    background-color: #409eff;
+    background-color: #4188cf;
     color: #fff;
     user-select: none;
 }
 
 .navbar-left {
+    display: flex;
     line-height: 50px;
-}
-
-.title {
-    float: left;
-    width: 200px;
+    width: 260px;
+    justify-content: space-around;
+    align-content: center;
 }
 
 .collapse-btn {
-    float: left;
-    line-height: 40px;
-    width: 30px;
-    padding-top: 7px;
+    padding-top: 2px;
     font-size: 22px;
     font-weight: 700;
     cursor: pointer;
 }
 
 .navbar-right {
-    line-height: 50px;
-    margin-right: 10px;
-}
-.flex-box{
+    width: 430px;
+    /* line-height: 50px; */
+    /* margin-right: 10px; */
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-around;
+    align-items: center;
 }
-.time {
 
-    width: 150px;
-    text-align: center;
+.navbar-right>* {
+    cursor: pointer;
+    font-weight: 600;
 }
 
 .fullScreen {
-    width: 60px;
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font: inherit;
+}
+
+.fullScreen>span {
+    font-weight: 600;
+
+    i {
+        position: relative;
+        left: 0px;
+        top: 2px;
+    }
 }
 
 .role {
