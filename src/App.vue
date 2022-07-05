@@ -5,6 +5,7 @@ import HelloWorld from './components/HelloWorld.vue'
 import LearnRef from './components/LearnRef.vue'
 import Header from './components/Header.vue'
 import Menu from './components/Menu.vue';
+import Content from './components/Content.vue';
 import { ref, isRef } from "vue"
 let isCollapse = ref(false);
 function handleClick(value) {
@@ -12,7 +13,7 @@ function handleClick(value) {
   console.log(isRef(isCollapse))
 }
 
-function myClick(index){
+function myClick(index) {
   console.log(index);
 }
 </script>
@@ -26,7 +27,7 @@ function myClick(index){
 
       <Menu class="layout-b-left" :isCollapse="isCollapse"></Menu>
       <div class="layout-b-right">
-        <span v-for="item in 100" :key="item" @click="myClick(key)">content-item</span>
+        <Content></Content>
       </div>
     </div>
   </div>
@@ -41,7 +42,6 @@ function myClick(index){
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  height: 100%;
 }
 
 .layout {
@@ -58,21 +58,22 @@ function myClick(index){
     display: flex;
     flex-direction: row;
     flex: 1;
+    // background-color: #e9fff3;
 
     .layout-b-left {
-      height: 100%;
-      border: solid 1px var(--el-menu-border-color);
-
+      border-right: solid 1px black;
       ul {
-        height: 100%;
+        // width: 100%;
       }
     }
+
     .layout-b-right {
       display: flex;
       flex: 1;
       flex-direction: column;
       overflow: auto;
-      margin: 10px 0px 0px 10px;
+      // background-color: #ffb300;
+      // margin: 10px 0px 0px 10px;
     }
   }
 }

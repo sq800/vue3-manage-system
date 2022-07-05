@@ -1,22 +1,23 @@
 <template>
     <div>
-        <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="isCollapse" @open="handleOpen"
-            @close="handleClose">
+        <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="isCollapse" unique-opened
+            @open="handleOpen" @close="handleClose" :collapse-transition="true">
             <el-sub-menu index="1">
                 <template #title>
-                    <el-icon><House /></el-icon>
+                    <el-icon>
+                        <House />
+                    </el-icon>
                     <span>单位组织</span>
                 </template>
-                <el-menu-item-group>
-                    <el-menu-item index="1-1">员工管理</el-menu-item>
-                    <el-menu-item index="1-2">部门管理</el-menu-item>
-                    <el-menu-item index="1-3">职位管理</el-menu-item>
-                </el-menu-item-group>
-
+                <el-menu-item index="1-1">员工管理</el-menu-item>
+                <el-menu-item index="1-2">部门管理</el-menu-item>
+                <el-menu-item index="1-3">职位管理</el-menu-item>
             </el-sub-menu>
             <el-sub-menu index="2">
                 <template #title>
-                    <el-icon><Setting /></el-icon>
+                    <el-icon>
+                        <Setting />
+                    </el-icon>
                     <span>系统管理</span>
                 </template>
                 <el-menu-item-group>
@@ -44,6 +45,26 @@ import {
     Location,
     Setting,
 } from '@element-plus/icons-vue'
+const list = [
+    {
+        key: '1',
+        title: 'Option 1',
+    },
+    {
+        key: '2',
+        title: 'Navigation 2',
+        children: [
+            {
+                key: '2.1',
+                title: 'Navigation 3',
+                children: [
+                    {
+                        key: '2.1.1',
+                        title: 'Option 2.1.1',
+                    }],
+            }],
+    }
+];
 defineProps({
     isCollapse: reactive({
         default: false
@@ -58,10 +79,13 @@ const handleClose = (key, keyPath) => {
 </script>
 
 <style lang="less">
-div{
-    height: 100%;
-}
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
+    height: 100%;
+    // min-height: 100%;
+}
+
+.el-menu--collapse {
+    // height: 100%;
 }
 </style>
