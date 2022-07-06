@@ -1,19 +1,31 @@
 <template>
     <div>
-        <el-menu default-active="2" class="el-menu-vertical-demo" :collapse="isCollapse" unique-opened
-            @open="handleOpen" @close="handleClose" :collapse-transition="true">
-            <el-sub-menu index="1">
+        <el-menu default-active="1" class="el-menu-vertical-demo" :collapse="isCollapse" unique-opened
+            @open="handleOpen" @close="handleClose" :collapse-transition="false">
+            <el-sub-menu v-for="item in list" :index="item.key" @select="console.log(item.key)">
                 <template #title>
-                    <el-icon>
-                        <House />
-                    </el-icon>
-                    <span>单位组织</span>
+                    <component style="width:15px;margin:0 5px 0 3px;" :is="item.icon"></component>
+                    <span>{{ item.title }}</span>
                 </template>
-                <el-menu-item index="1-1">员工管理</el-menu-item>
-                <el-menu-item index="1-2">部门管理</el-menu-item>
-                <el-menu-item index="1-3">职位管理</el-menu-item>
+                <template v-for="subItem in item.children" v-if="item.children">
+                    <template v-if="subItem.children">
+                        <el-sub-menu :index="subItem.key">
+                            <template #title><span>{{ subItem.title }}</span></template>
+                            <el-menu-item v-for="subSubItem in subItem.children" :index="subSubItem.key">
+                                <span>{{ subSubItem.title }}</span>
+                            </el-menu-item>
+                        </el-sub-menu>
+                    </template>
+                    <template v-else>
+                        <el-menu-item :index="subItem.key">
+                            <span>{{ subItem.title }}</span>
+                        </el-menu-item>
+                    </template>
+
+                </template>
+
             </el-sub-menu>
-            <el-sub-menu index="2">
+            <!-- <el-sub-menu index="2">
                 <template #title>
                     <el-icon>
                         <Setting />
@@ -31,7 +43,7 @@
                     <el-menu-item index="2-4-2">操作日志</el-menu-item>
                     <el-menu-item index="2-4-3">API日志</el-menu-item>
                 </el-sub-menu>
-            </el-sub-menu>
+            </el-sub-menu> -->
 
         </el-menu>
     </div>
@@ -48,21 +60,42 @@ import {
 const list = [
     {
         key: '1',
-        title: 'Option 1',
+        title: '单位组织',
+        icon: 'House',
+        children: [
+            {
+                key: '1.1',
+                title: '员工管理'
+            },
+            {
+                key: '1.2',
+                title: '部门管理'
+            },
+            {
+                key: '1.3',
+                title: '职位管理'
+            }
+        ]
     },
     {
         key: '2',
-        title: 'Navigation 2',
+        title: '系统管理',
+        icon:'Setting',
         children: [
             {
                 key: '2.1',
-                title: 'Navigation 3',
+                title: '角色管理'
+            },
+            {
+                key: '2.2',
+                title: '系统日志',
                 children: [
                     {
-                        key: '2.1.1',
-                        title: 'Option 2.1.1',
+                        key: '2.2.1',
+                        title: '登录日志',
                     }],
-            }],
+            },
+        ],
     }
 ];
 defineProps({

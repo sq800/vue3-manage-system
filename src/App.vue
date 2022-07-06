@@ -58,7 +58,7 @@ function myClick(index) {
     display: flex;
     flex-direction: row;
     flex: 1;
-    // background-color: #e9fff3;
+    // background-color: #66abdd;
 
     .layout-b-left {
       border-right: solid 1px black;
