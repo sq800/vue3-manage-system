@@ -2,22 +2,25 @@
     <div>
         <el-menu default-active="1" class="el-menu-vertical-demo" :collapse="isCollapse" unique-opened
             @open="handleOpen" @close="handleClose" :collapse-transition="false">
-            <el-sub-menu v-for="item in list" :index="item.key" @select="console.log(item.key)">
+            <el-sub-menu v-for="item in list" :index="item.key">
                 <template #title>
-                    <component style="width:15px;margin:0 5px 0 3px;" :is="item.icon"></component>
+                    <el-icon>
+                        <component :is="item.icon"></component>
+                    </el-icon>
                     <span>{{ item.title }}</span>
                 </template>
                 <template v-for="subItem in item.children" v-if="item.children">
                     <template v-if="subItem.children">
                         <el-sub-menu :index="subItem.key">
                             <template #title><span>{{ subItem.title }}</span></template>
-                            <el-menu-item v-for="subSubItem in subItem.children" :index="subSubItem.key">
+                            <el-menu-item @click="menuItemClick(subSubItem)"
+                                v-for="subSubItem in subItem.children" :index="subSubItem.key">
                                 <span>{{ subSubItem.title }}</span>
                             </el-menu-item>
                         </el-sub-menu>
                     </template>
                     <template v-else>
-                        <el-menu-item :index="subItem.key">
+                        <el-menu-item @click="menuItemClick(subItem)" :index="subItem.key">
                             <span>{{ subItem.title }}</span>
                         </el-menu-item>
                     </template>
@@ -65,26 +68,30 @@ const list = [
         children: [
             {
                 key: '1.1',
-                title: '员工管理'
+                title: '员工管理',
+                name: 'SM'
             },
             {
                 key: '1.2',
-                title: '部门管理'
+                title: '部门管理',
+                name: 'DM'
             },
             {
                 key: '1.3',
-                title: '职位管理'
+                title: '职位管理',
+                name: 'PM'
             }
         ]
     },
     {
         key: '2',
         title: '系统管理',
-        icon:'Setting',
+        icon: 'Setting',
         children: [
             {
                 key: '2.1',
-                title: '角色管理'
+                title: '角色管理',
+                name: 'RM'
             },
             {
                 key: '2.2',
@@ -93,21 +100,31 @@ const list = [
                     {
                         key: '2.2.1',
                         title: '登录日志',
+                        name: 'LL'
                     }],
             },
         ],
     }
 ];
-defineProps({
-    isCollapse: reactive({
+// let isCollapse=true;
+let props = defineProps({
+    isCollapse: {
+        type: Boolean,
         default: false
-    })
+    }
 })
 const handleOpen = (key, keyPath) => {
     console.log(key, keyPath)
 }
 const handleClose = (key, keyPath) => {
     console.log(key, keyPath)
+}
+//注册
+const emit = defineEmits(["menuClick"]);
+// 菜单子项点击事件函数
+const menuItemClick = (val) => {
+    // console.log(val)
+    emit("menuClick", val.title,val.name)
 }
 </script>
 
@@ -116,9 +133,5 @@ const handleClose = (key, keyPath) => {
     width: 200px;
     height: 100%;
     // min-height: 100%;
-}
-
-.el-menu--collapse {
-    // height: 100%;
 }
 </style>

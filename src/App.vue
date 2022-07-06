@@ -6,12 +6,29 @@ import LearnRef from './components/LearnRef.vue'
 import Header from './components/Header.vue'
 import Menu from './components/Menu.vue';
 import Content from './components/Content.vue';
-import { ref, isRef } from "vue"
+import { ref, isRef,reactive } from "vue"
+// 菜单伸缩状态
 let isCollapse = ref(false);
-function handleClick(value) {
+// 菜单选中的选项
+let selectedMenu=ref({
+  name:'1',
+  title:'1'
+});
+
+// 接收header组件传参的函数
+function handleHeader(value) {
   isCollapse.value = value
-  console.log(isRef(isCollapse))
+  console.log(isCollapse.value)
 }
+// 接收Menu组件传参的函数
+function handleMenu(title,name) {
+  console.log(title,name)
+  // 把值传给content组件
+  selectedMenu.value.name=name
+  selectedMenu.value.title=title
+}
+//打开的标签页
+let openedTabList = {}
 
 function myClick(index) {
   console.log(index);
@@ -20,14 +37,11 @@ function myClick(index) {
 
 <template>
   <div class="layout">
-    <!-- <div class="layout-top">头部</div> -->
-    <Header class="layout-top" @my-click="handleClick"></Header>
+    <Header class="layout-top" @my-click="handleHeader"></Header>
     <div class="layout-bottom">
-      <!-- <Menu class="menu" :isCollapse="isCollapse"></Menu> -->
-
-      <Menu class="layout-b-left" :isCollapse="isCollapse"></Menu>
+      <Menu class="layout-b-left" @menuClick="handleMenu" :isCollapse="isCollapse"></Menu>
       <div class="layout-b-right">
-        <Content></Content>
+        <Content :selectedMenu="selectedMenu"></Content>
       </div>
     </div>
   </div>
@@ -62,6 +76,7 @@ function myClick(index) {
 
     .layout-b-left {
       border-right: solid 1px black;
+
       ul {
         // width: 100%;
       }
