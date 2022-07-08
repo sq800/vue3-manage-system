@@ -13,8 +13,8 @@
                     <template v-if="subItem.children">
                         <el-sub-menu :index="subItem.key">
                             <template #title><span>{{ subItem.title }}</span></template>
-                            <el-menu-item @click="menuItemClick(subSubItem)"
-                                v-for="subSubItem in subItem.children" :index="subSubItem.key">
+                            <el-menu-item @click="menuItemClick(subSubItem)" v-for="subSubItem in subItem.children"
+                                :index="subSubItem.key">
                                 <span>{{ subSubItem.title }}</span>
                             </el-menu-item>
                         </el-sub-menu>
@@ -124,7 +124,7 @@ const emit = defineEmits(["menuClick"]);
 // 菜单子项点击事件函数
 const menuItemClick = (val) => {
     // console.log(val)
-    emit("menuClick", val.title,val.name)
+    emit("menuClick", val.title, val.name)
 }
 </script>
 
@@ -132,6 +132,5 @@ const menuItemClick = (val) => {
 .el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     height: 100%;
-    // min-height: 100%;
 }
 </style>

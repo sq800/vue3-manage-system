@@ -1,6 +1,6 @@
 <template>
 
-  <el-tabs v-model="editableTabsValue" type="card" class="demo-tabs" closable @tab-remove="removeTab">
+  <el-tabs v-model="currentTabs" type="card" class="demo-tabs" closable @tab-remove="removeTab">
     <el-tab-pane v-for="item in editableTabs" :key="item.name" :label="item.title" :name="item.name">
       <keep-alive>
         jjj
@@ -13,12 +13,13 @@ import { ref } from 'vue'
 
 defineProps({
   selectedMenu:{
-    
+    type:String,
+    default:"SM"
   }
 })
 
 let tabIndex = 2
-const editableTabsValue = ref('2')
+const currentTabs = selectedMenu
 const editableTabs = ref([
   {
     title: '员工管理',
@@ -28,7 +29,7 @@ const editableTabs = ref([
   },
   {
     title: '部门管理',
-    name: '2',
+    name: 'DM',
     content: 'Tab 2 content',
   },
 ])
