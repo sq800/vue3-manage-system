@@ -1,8 +1,6 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
-import HelloWorld from './components/HelloWorld.vue'
-import LearnRef from './components/LearnRef.vue'
 import Header from './components/Header.vue'
 import Menu from './components/Menu.vue';
 import Content from './components/Content.vue';
@@ -76,10 +74,6 @@ function myClick(index) {
 
     .layout-b-left {
       border-right: solid 1px black;
-
-      ul {
-        // width: 100%;
-      }
     }
 
     .layout-b-right {
