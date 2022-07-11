@@ -1,73 +1,46 @@
+<!--
+ * @FilePath     : Content.vue
+ * @Description  : 在右侧区域显示不同的views
+ * @Author       : sq800
+ * @Date         : 2022/07/11
+ * @LastEditors  : sq800
+ * @LastEditTime : 2022/07/11
+ * @Copyright (c) 2022 by sq800, All Rights Reserved. 
+ -->
 <template>
-  <el-tabs
-    v-model="editableTabsValue"
-    type="card"
-    editable
-    class="demo-tabs"
-    @edit="handleTabsEdit"
-  >
-    <el-tab-pane
-      v-for="item in editableTabs"
-      :key="item.name"
-      :label="item.title"
-      :name="item.name"
-    >
-      {{ item.content }}
-    </el-tab-pane>
-  </el-tabs>
-</template>
-<script lang="ts" setup>
-import { ref } from 'vue'
+  <router-link to='/'>首页</router-link>
+  <router-link to="/SM">员工管理</router-link>
+  <router-link to="/DM">部门管理</router-link>
 
-let tabIndex = 2
-const editableTabsValue = ref('2')
-const editableTabs = ref([
+  <router-view></router-view>
+</template>
+<script setup>
+import { computed } from '@vue/reactivity'
+import { ref, reactive, markRaw } from 'vue'
+import SM from '../view/SM.vue'
+import DM from '../view/DM.vue'
+let currentTabs="/SM"
+let editableTabs = reactive([
   {
-    title: 'Tab 1',
-    name: '1',
+    title: '员工管理',
+    name: "SM",
+    id: markRaw(SM),
     content: 'Tab 1 content',
   },
   {
-    title: 'Tab 2',
-    name: '2',
+    title: '部门管理',
+    name: 'DM',
+    id: markRaw(DM),
     content: 'Tab 2 content',
   },
 ])
-
-const handleTabsEdit = (targetName: string, action: 'remove' | 'add') => {
-  if (action === 'add') {
-    const newTabName = `${++tabIndex}`
-    editableTabs.value.push({
-      title: 'New Tab',
-      name: newTabName,
-      content: 'New Tab content',
-    })
-    editableTabsValue.value = newTabName
-  } else if (action === 'remove') {
-    const tabs = editableTabs.value
-    let activeName = editableTabsValue.value
-    if (activeName === targetName) {
-      tabs.forEach((tab, index) => {
-        if (tab.name === targetName) {
-          const nextTab = tabs[index + 1] || tabs[index - 1]
-          if (nextTab) {
-            activeName = nextTab.name
-          }
-        }
-      })
-    }
-
-    editableTabsValue.value = activeName
-    editableTabs.value = tabs.filter((tab) => tab.name !== targetName)
-  }
-}
 </script>
+
 <style>
-.demo-tabs > .el-tabs__content {
+.demo-tabs>.el-tabs__content {
   padding: 32px;
   color: #6b778c;
   font-size: 32px;
   font-weight: 600;
-  height: 90%;
 }
 </style>
