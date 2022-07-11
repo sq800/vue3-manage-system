@@ -9,16 +9,19 @@
                     </el-icon>
                     <span>{{ item.title }}</span>
                 </template>
+                <!--      👇循环渲染一级菜单                 👇若一级菜单下有二级菜单       -->
                 <template v-for="subItem in item.children" v-if="item.children">
+                    <!--        👇若二级菜单下三级菜单  -->
                     <template v-if="subItem.children">
                         <el-sub-menu :index="subItem.key">
+                            <!--      👇标题插槽-->
                             <template #title><span>{{ subItem.title }}</span></template>
+                            <!--            👇点击具体菜单触发传参 -->
                             <el-menu-item @click="menuItemClick(subSubItem)" v-for="subSubItem in subItem.children"
-                                :index="subSubItem.key">
-                                <span>{{ subSubItem.title }}</span>
-                            </el-menu-item>
+                                :index="subSubItem.key"><span>{{ subSubItem.title }}</span></el-menu-item>
                         </el-sub-menu>
                     </template>
+                    <!-- 若子菜单无子菜单 -->
                     <template v-else>
                         <el-menu-item @click="menuItemClick(subItem)" :index="subItem.key">
                             <span>{{ subItem.title }}</span>
