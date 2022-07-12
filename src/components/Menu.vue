@@ -1,7 +1,7 @@
 <template>
     <div>
         <!-- 整个菜单根元素 -->
-        <el-menu default-active="1" class="sidebar-el-menu" :collapse="isCollapse" :router="isRoute"
+        <el-menu default-active="1" class="sidebar-el-menu" :collapse="store.isCollapse" :router="isRoute"
             :collapse-transition="true">
             <template v-for="item in list">
                 <!-- 一级菜单下    有    二级菜单 -->
@@ -42,13 +42,9 @@
 </template>
 
 <script setup>
-import { ref, reactive } from 'vue'
-import {
-    Document,
-    Menu as IconMenu,
-    Location,
-    Setting,
-} from '@element-plus/icons-vue'
+import {useStore} from '../store/index'
+const store=useStore();
+console.log(store.isCollapse);
 // 开启菜单路由
 let isRoute = true;
 const list = [
@@ -75,6 +71,7 @@ const list = [
     {
         title: '系统管理',
         icon: 'Setting',
+        name:"SYM",
         children: [
             {
                 title: '角色管理',
@@ -110,13 +107,13 @@ const handleOpen = (key, keyPath) => {
 const handleClose = (key, keyPath) => {
     console.log(key, keyPath)
 }
-// 注册
-const emit = defineEmits(["menuClick"]);
-// 菜单子项点击事件函数
-const menuItemClick = (val) => {
-    // console.log(val)
-    emit("menuClick", val.title, val.name)
-}
+// // 注册
+// const emit = defineEmits(["menuClick"]);
+// // 菜单子项点击事件函数
+// const menuItemClick = (val) => {
+//     // console.log(val)
+//     emit("menuClick", val.title, val.name)
+// }
 </script>
 
 <style lang="less">

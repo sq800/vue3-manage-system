@@ -5,11 +5,11 @@
 
             <!-- 展开按钮，展开左侧菜单 -->
             <span class="collapse-btn" v-on:click="handleCollapse">
-                <el-icon v-if="menuStatus">
-                    <Fold />
+                <el-icon v-if="store.isCollapse">
+                    <Expand />
                 </el-icon>
                 <el-icon v-else>
-                    <Expand />
+                    <Fold />
                 </el-icon>
             </span>
         </div>
@@ -32,9 +32,9 @@
 <script setup>
 import { get } from 'lodash'
 import { ref, isRef } from 'vue'
+import { useStore } from '../store/index'
+const store = useStore()
 
-// true 展开菜单  false 关闭菜单
-let menuStatus = ref(true);
 // 当前时间
 let currentTimeString = ref("");
 getCurrent();
@@ -80,12 +80,10 @@ function getCurrent() {
         }
     }
 }
-//向父组件传参
-const emit = defineEmits(["my-click"]);
+
 // 展开/关闭处理函数
 function handleCollapse() {
-    menuStatus.value = !menuStatus.value;
-    emit("my-click", menuStatus.value);
+    store.isCollapse=!store.isCollapse
 }
 let fullScreen = false;
 function handleFullScreen() {
@@ -110,7 +108,6 @@ function handleFullScreen() {
         } else if (element.msRequestFullscreen) { }
     }
     fullScreen = !fullScreen
-
 }
 </script>
 <style lang="less">
