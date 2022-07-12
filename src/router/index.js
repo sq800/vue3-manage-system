@@ -5,7 +5,12 @@ import Home from "../view/Home.vue"
 const routes = [
     { path: "/", component: Home },
     { path: '/DM', component: () => import('../view/DM.vue') },
-    { path: '/SM', component: () => import('../view/SM.vue') }
+    { path: '/SM', component: () => import('../view/SM.vue') },
+    { path: '/PM', component: () => import('../view/PM.vue') },
+    { path: '/RM', component: () => import('../view/RM.vue') },
+    { path: '/LL', component: () => import('../view/LL.vue') },
+    { path: '/test', component: () => import('../view/test.vue') },
+
 ]
 
 // 创建路由

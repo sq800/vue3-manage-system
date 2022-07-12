@@ -1,5 +1,6 @@
 <template>
-  <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick" :default-expand-all="true"/>
+  <!-- <el-tree :data="data" :props="defaultProps" @node-click="handleNodeClick" :default-expand-all="true"/> -->
+<div>员工管理staff manage</div>  
 </template>
 
 <script lang="ts" setup>
@@ -46,28 +47,7 @@ const data: Tree[] = [
         ],
       },
     ],
-  },
-  {
-    label: 'Level one 3',
-    children: [
-      {
-        label: 'Level two 3-1',
-        children: [
-          {
-            label: 'Level three 3-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 3-2',
-        children: [
-          {
-            label: 'Level three 3-2-1',
-          },
-        ],
-      },
-    ],
-  },
+  }
 ]
 
 const defaultProps = {

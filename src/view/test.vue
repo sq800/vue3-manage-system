@@ -1,37 +1,43 @@
 <template>
-    <div>
+    <div class="side-bar">
         <!-- 整个菜单根元素 -->
         <el-menu default-active="1" class="sidebar-el-menu" :collapse="isCollapse" :router="isRoute"
-            :collapse-transition="true">
+            :collapse-transition="true" >
             <template v-for="item in list">
                 <!-- 一级菜单下    有    二级菜单 -->
-                <el-sub-menu v-if="item.children" :index="item.name">
+                <el-sub-menu v-if="item.children" :index="item.key">
                     <template #title>
                         <el-icon>
                             <component :is="item.icon"></component>
                         </el-icon>
                         <span>{{ item.title }}</span>
                     </template>
-
-                    <template v-for="subItem in item.children">
-                            <el-sub-menu v-if="subItem.children" :index="subItem.name">
-                                <template #title><span>{{ subItem.title }}</span></template>
-                                <el-menu-item v-for="subSubItem in subItem.children"
-                                    :index="subSubItem.name">
-                                    <span>{{ subSubItem.title }}</span>
-                                </el-menu-item>
-                            </el-sub-menu>
-                            <el-menu-item v-else :index="subItem.name">
-                                <span>{{ subItem.title }}</span>
+                    <!-- 循环渲染二级菜单 -->
+                    <template v-if="item.children" v-for="subItem in item.children">
+                        <!--若二级菜单下  有  三级菜单，使用 el-sub-menu  -->
+                        <el-sub-menu v-if="subItem.children" :index="subItem.key">
+                            <!--标题插槽-->
+                            <template #title><span>{{ subItem.title }}</span></template>
+                            <!--点击具体菜单触发传参 -->
+                            <el-menu-item @click="menuItemClick(subSubItem)" v-for="subSubItem in subItem.children"
+                                :index="subSubItem.name">
+                                <span>{{ subSubItem.title }}</span>
                             </el-menu-item>
+                        </el-sub-menu>
+
+                        <!-- 若  无  三级菜单，直接渲染 el-menu-item -->
+                        <el-menu-item v-else @click="menuItemClick(subItem)" :index="subItem.name">
+                            <span>{{ subItem.title }}</span>
+                        </el-menu-item>
                     </template>
                 </el-sub-menu>
 
-                <el-menu-item v-else :index="item.name">
-                    <el-icon>
-                        <component :is="item.icon"></component>
-                    </el-icon>
+                <!-- 一级菜单下    无    子菜单 -->
+                <el-menu-item v-else>
                     <template #title>
+                        <el-icon>
+                            <component :is="item.icon"></component>
+                        </el-icon>
                         <span>{{ item.title }}</span>
                     </template>
                 </el-menu-item>
@@ -54,9 +60,9 @@ let isRoute = true;
 const list = [
     {
         // element+ 中菜单开启vue-router模式，会把元素的index作为path
+        key: '1',
         title: '单位组织',
         icon: 'House',
-        name:'UO',
         children: [
             {
                 title: '员工管理',
@@ -73,6 +79,7 @@ const list = [
         ]
     },
     {
+        key: '2',
         title: '系统管理',
         icon: 'Setting',
         children: [
@@ -82,7 +89,6 @@ const list = [
             },
             {
                 title: '系统日志',
-                name:'SL',
                 children: [
                     {
                         title: '登录日志',
@@ -92,9 +98,9 @@ const list = [
         ],
     },
     {
-        title: '待办',
-        name:'TODO',
-        icon: 'BellFilled',
+        key: '3',
+        title: '人事管理',
+        icon: 'Setting',
 
     }
 ];
@@ -120,7 +126,7 @@ const menuItemClick = (val) => {
 </script>
 
 <style lang="less">
-.sidebar-el-menu {
+.el-menu-vertical-demo:not(.el-menu--collapse) {
     width: 200px;
     height: 100%;
 }

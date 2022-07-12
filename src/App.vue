@@ -73,7 +73,7 @@ function myClick(index) {
     // background-color: #66abdd;
 
     .layout-b-left {
-      border-right: solid 1px black;
+      border-right: solid 1px rgb(226, 255, 190);
     }
 
     .layout-b-right {
