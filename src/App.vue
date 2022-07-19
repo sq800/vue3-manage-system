@@ -45,19 +45,15 @@ import { ref, isRef,reactive } from "vue"
     display: flex;
     flex-direction: row;
     flex: 1;
-    // background-color: #66abdd;
 
     .layout-b-left {
       border-right: solid 1px rgb(226, 255, 190);
     }
 
     .layout-b-right {
-      display: flex;
+      padding: 15px 15px 0 15px;
       flex: 1;
-      flex-direction: column;
-      overflow: auto;
-      // background-color: #ffb300;
-      // margin: 10px 0px 0px 10px;
+      background-color: #f3f3f4;
     }
   }
 }

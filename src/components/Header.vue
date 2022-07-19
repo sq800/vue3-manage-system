@@ -6,10 +6,10 @@
             <!-- 展开按钮，展开左侧菜单 -->
             <span class="collapse-btn" v-on:click="handleCollapse">
                 <el-icon v-if="store.isCollapse">
-                    <Expand />
+                    <Fold />
                 </el-icon>
                 <el-icon v-else>
-                    <Fold />
+                    <Expand />
                 </el-icon>
             </span>
         </div>
