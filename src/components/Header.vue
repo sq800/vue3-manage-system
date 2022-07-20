@@ -117,7 +117,7 @@ function handleFullScreen() {
     align-items: center;
     width: 100%;
     height: 50px;
-    background-color: #4188cf;
+    background-color: #337ecc;
     color: #fff;
     user-select: none;
 }

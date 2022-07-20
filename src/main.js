@@ -4,7 +4,7 @@
  * @Author       : sq800
  * @Date         : 2022/07/01
  * @LastEditors  : sq800
- * @LastEditTime : 2022/07/12
+ * @LastEditTime : 2022/07/20
  * @Copyright (c) 2022 by sq800, All Rights Reserved. 
  *******************************************************************************/
 import { createApp } from 'vue'
@@ -13,6 +13,9 @@ import App from './App.vue'
 // 引入element-plus
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+
+// 国际化
+import  zhCn  from 'element-plus/es/locale/lang/zh-cn'
 // 引入elementplus icon库
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 // 引入创建好的router
@@ -26,7 +29,9 @@ const store = createPinia()
 const app=createApp(App)
 
 // 使用element+ router pinia
-app.use(ElementPlus).use(router).use(store)
+app.use(ElementPlus,{
+    locale:zhCn
+}).use(router).use(store)
 
 //全局注册element icon
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {

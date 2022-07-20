@@ -4,12 +4,12 @@
  * @Author       : sq800
  * @Date         : 2022/07/11
  * @LastEditors  : sq800
- * @LastEditTime : 2022/07/19
+ * @LastEditTime : 2022/07/20
  * @Copyright (c) 2022 by sq800, All Rights Reserved. 
  -->
 <template >
 
-<router-view v-slot="{ Component }" class="fff">
+<router-view v-slot="{ Component }" class="h100">
   <keep-alive>
     <component :is="Component" />
   </keep-alive>
@@ -22,6 +22,8 @@
 <style>
 .fff{
   background-color: #fff;
+}
+.h100{
   height: 100%;
 }
 </style>
