@@ -4,7 +4,7 @@ import { onMounted } from "vue";
 import * as echarts from 'echarts'
 function chart1() {
   var chartDom = document.getElementById('statistics');
-  chartDom.onresize = function () {
+  window.onresize = function () {
     myChart.resize()
   }
   console.log(chartDom);
