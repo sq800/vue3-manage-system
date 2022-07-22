@@ -46,9 +46,7 @@ import { ref, isRef,reactive } from "vue"
     flex-direction: row;
     flex: 1;
 
-    .layout-b-left {
-      border-right: solid 1px rgb(226, 255, 190);
-    }
+    
 
     .layout-b-right {
       padding: 15px 15px 0 15px;

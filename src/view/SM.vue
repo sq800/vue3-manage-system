@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from 'vue';
-
+import IconText from "../components/IconText.vue";
 const data = [
   {
     label: 'Level one 1',
@@ -87,13 +87,50 @@ let options = [
     value: 'Option5',
     label: 'Option5',
   }]
+  const tableData = [
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-02',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-04',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-01',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-08',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-06',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+  {
+    date: '2016-05-07',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
+]
 </script>
 
 <template>
   <div class="flex">
     <div class="tree">
       <div class="fff">组织机构</div>
-      <el-tree :data="data" :props="defaultProps" :default-expand-all="true" :expand-on-click-node="false"/>
+      <el-tree :data="data" :props="defaultProps" :default-expand-all="true" :expand-on-click-node="false" />
     </div>
     <div class="right flex">
 
@@ -120,15 +157,41 @@ let options = [
 
         </span>
         <span>
-          <el-button type="primary">搜索</el-button>
+          <el-button type="primary" icon="Search">搜索</el-button>
         </span>
       </div>
-      <div class="content shadow-b">11111111111111222</div>
+      <div class="content shadow-b">
+
+        <el-button type="primary" icon="Plus" size="normal">新增</el-button>
+        <el-button type="success" icon="Edit" size="small" color="">修改</el-button>
+        <el-button type="danger" icon="SemiSelect" size="small">删除</el-button>
+        <el-button type="warning" icon="Download" size="small">导出</el-button>
+
+        <el-table  ref="multipleTableRef" :data="tableData" style="width: 100%"
+          @selection-change="handleSelectionChange">
+          <el-table-column :sortable="true" type="selection" width="55" />
+          <el-table-column :sortable="true" label="Date" width="120">
+            <template #default="scope">{{ scope.row.date }}</template>
+          </el-table-column>
+          <el-table-column :sortable="true" property="name" label="Name" width="120" />
+          <el-table-column :sortable="true" property="address" label="Address" show-overflow-tooltip />
+        </el-table>
+      </div>
     </div>
   </div>
 </template>
 
 <style scoped>
+.bg-blue {
+  width: 100px;
+  height: 40px;
+  color: #ffffff;
+  background-color: #4485f5;
+  font-weight: 700;
+  font-size: large;
+  /* background-color: aqua; */
+}
+
 .flex {
   display: flex;
 }
@@ -158,6 +221,7 @@ let options = [
 }
 
 .content {
+  padding: 10px;
   background-color: #fff;
   border-radius: 5px;
   flex-grow: 1;
@@ -166,5 +230,10 @@ let options = [
 
 .w-50 {
   width: 180px;
+}
+
+.fff {
+  font-weight: bold;
+  color: #fff;
 }
 </style>
