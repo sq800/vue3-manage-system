@@ -4,7 +4,7 @@
         <el-menu default-active="1" class="sidebar-el-menu" :collapse="store.isCollapse" :router="isRoute"
             :collapse-transition="true">
             <template v-for="item in list">
-                <!-- 一级菜单下    有    二级菜单 -->
+                <!-- 一级菜单的子菜单 -->
                 <el-sub-menu v-if="item.children" :index="item.name">
                     <template #title>
                         <el-icon>
@@ -26,7 +26,7 @@
                             </el-menu-item>
                     </template>
                 </el-sub-menu>
-
+                <!-- 一级菜单下的子栏目 -->
                 <el-menu-item v-else :index="item.name">
                     <el-icon>
                         <component :is="item.icon"></component>

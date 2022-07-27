@@ -58,12 +58,14 @@ const data = [
     ],
   },
 ]
-
+let currentPage = ref(1)
 const defaultProps = {
   children: 'children',
   label: 'label',
 }
-
+let log = (v) => {
+  console.log(v)
+}
 let searchObj = reactive({})
 const value = ref('')
 let options = [
@@ -87,7 +89,12 @@ let options = [
     value: 'Option5',
     label: 'Option5',
   }]
-  const tableData = [
+const tableData = [
+  {
+    date: '2016-05-03',
+    name: 'Tom',
+    address: 'No. 189, Grove St, Los Angeles',
+  },
   {
     date: '2016-05-03',
     name: 'Tom',
@@ -127,13 +134,15 @@ let options = [
 </script>
 
 <template>
-  <div class="flex">
+  <div class="view">
+    <!-- 左侧树形结构 -->
     <div class="tree">
       <div class="fff">组织机构</div>
       <el-tree :data="data" :props="defaultProps" :default-expand-all="true" :expand-on-click-node="false" />
+      <div>></div>
     </div>
     <div class="right flex">
-
+      <!-- 右侧数据功能区域  -->
       <div class="search shadow-b">
         <span>
           登录名称：
@@ -151,9 +160,9 @@ let options = [
         </span>
         <span>
           <span>创建时间：</span>
-          <el-date-picker class="w-50" v-model="searchObj.value1" type="date" placeholder="Pick a day" :size="size" />
+          <el-date-picker class="w-50" v-model="searchObj.value1" type="date" placeholder="Pick a day" />
           <span>-</span>
-          <el-date-picker class="w-50" v-model="searchObj.value2" type="date" placeholder="Pick a day" :size="size" />
+          <el-date-picker class="w-50" v-model="searchObj.value2" type="date" placeholder="Pick a day" />
 
         </span>
         <span>
@@ -161,42 +170,80 @@ let options = [
         </span>
       </div>
       <div class="content shadow-b">
-
-        <el-button type="primary" icon="Plus" size="normal">新增</el-button>
-        <el-button type="success" icon="Edit" size="small" color="">修改</el-button>
-        <el-button type="danger" icon="SemiSelect" size="small">删除</el-button>
-        <el-button type="warning" icon="Download" size="small">导出</el-button>
-
-        <el-table  ref="multipleTableRef" :data="tableData" style="width: 100%"
-          @selection-change="handleSelectionChange">
-          <el-table-column :sortable="true" type="selection" width="55" />
-          <el-table-column :sortable="true" label="Date" width="120">
-            <template #default="scope">{{ scope.row.date }}</template>
-          </el-table-column>
-          <el-table-column :sortable="true" property="name" label="Name" width="120" />
-          <el-table-column :sortable="true" property="address" label="Address" show-overflow-tooltip />
-        </el-table>
+        <div class="button-group">
+          <el-button type="primary" icon="Plus" size="default">新增</el-button>
+          <el-button type="success" icon="Edit" size="small" color="">修改</el-button>
+          <el-button type="danger" icon="SemiSelect" size="small">删除</el-button>
+          <el-button type="warning" icon="Download" size="small">导出</el-button>
+        </div>
+        <div class="container">
+          <div class="table">
+            <el-table v-if="1 == 1" :data="tableData" :scrollbar-always-on="true" max-height="400px" @selection-change="">
+              <el-table-column :sortable="false" fixed type="selection" width="55" />
+              <el-table-column :sortable="true" label="日期" width="120">
+                <template #default="scope">{{ scope.row.date }}</template>
+              </el-table-column>
+              <el-table-column :sortable="true" property="name" label="客户姓名" width="120" />
+              <el-table-column :sortable="false" property="address" label="地址" width="120" show-overflow-tooltip />
+              <el-table-column :sortable="false" property="cost" label="剩余费用" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column label="操作" fixed="right">
+                <template #default="scope">
+                  <el-button size="small" @click="log('编辑')">编辑</el-button>
+                  <el-button size="small" @click="log('删除')">删除</el-button>
+                </template>
+              </el-table-column>
+            </el-table>
+          </div>
+          <div class="demo-pagination-block">
+          <div class="demonstration">Total item count</div>
+          <el-pagination v-model:currentPage="currentPage" :page-size="100" :small="small" :disabled="disabled"
+            :background="background" layout="total, prev, pager, next" :total="1000" @size-change="handleSizeChange"
+            @current-change="handleCurrentChange" />
+        </div>
+        </div>
+        
       </div>
     </div>
   </div>
 </template>
 
-<style scoped>
-.bg-blue {
-  width: 100px;
-  height: 40px;
-  color: #ffffff;
-  background-color: #4485f5;
-  font-weight: 700;
-  font-size: large;
-  /* background-color: aqua; */
+<style scoped lang="less">
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
 
-.flex {
+.table {
+        flex: 1;
+        position: relative;
+        /deep/.el-table {
+            position: absolute;
+        }
+    }
+
+.button-group {
+  height: fit-content;
+}
+
+.demo-pagination-block {}
+
+.view {
   display: flex;
+  background-color: rgb(243, 202, 202);
 }
 
 .tree {
+  /* 指定盒子初始大小 */
   flex-basis: 200px;
   margin-right: 15px;
 }
@@ -205,6 +252,7 @@ let options = [
   flex-grow: 1;
   font-size: 14px;
   flex-direction: column;
+  display: flex;
 }
 
 .search {
@@ -225,7 +273,7 @@ let options = [
   background-color: #fff;
   border-radius: 5px;
   flex-grow: 1;
-  margin-bottom: 15px;
+  height: 100px;
 }
 
 .w-50 {

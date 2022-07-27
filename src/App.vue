@@ -34,6 +34,7 @@ import { ref, isRef,reactive } from "vue"
 .layout {
   display: flex;
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
   flex-direction: column;
 
@@ -44,13 +45,13 @@ import { ref, isRef,reactive } from "vue"
   .layout-bottom {
     display: flex;
     flex-direction: row;
-    flex: 1;
+    flex-grow: 1;
 
     
 
     .layout-b-right {
-      padding: 15px 15px 0 15px;
-      flex: 1;
+      padding: 15px 15px 15px 15px;
+      flex-grow:1;
       background-color: #f3f3f4;
     }
   }
