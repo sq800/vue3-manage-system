@@ -171,29 +171,30 @@ const tableData = [
       </div>
       <div class="content shadow-b">
         <div class="button-group">
-          <el-button type="primary" icon="Plus" size="default">新增</el-button>
+          <el-button type="primary" icon="Plus" size="small">新增</el-button>
           <el-button type="success" icon="Edit" size="small" color="">修改</el-button>
           <el-button type="danger" icon="SemiSelect" size="small">删除</el-button>
           <el-button type="warning" icon="Download" size="small">导出</el-button>
         </div>
         <div class="container">
           <div class="table">
-            <el-table v-if="1 == 1" :data="tableData" :scrollbar-always-on="true" max-height="400px" @selection-change="">
-              <el-table-column :sortable="false" fixed type="selection" width="55" />
-              <el-table-column :sortable="true" label="日期" width="120">
+            <el-table v-if="1 == 1" :data="tableData" :scrollbar-always-on="true" max-height="400px"
+            style="width: 100%;"  @selection-change="">
+              <el-table-column :sortable="false" fixed="left" type="selection" width="55" />
+              <el-table-column :sortable="true" label="日期" width="">
                 <template #default="scope">{{ scope.row.date }}</template>
               </el-table-column>
-              <el-table-column :sortable="true" property="name" label="客户姓名" width="120" />
-              <el-table-column :sortable="false" property="address" label="地址" width="120" show-overflow-tooltip />
-              <el-table-column :sortable="false" property="cost" label="剩余费用" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="true" property="name" label="客户姓名" width="" />
+              <el-table-column :sortable="false" property="address" label="地址" width="" show-overflow-tooltip />
+              <el-table-column :sortable="false" property="cost" label="剩余费用" width="" />
+              <el-table-column :sortable="false" property="state" label="状态" width="" />
+              <el-table-column :sortable="false" property="state" label="状态" width="" />
+              <el-table-column :sortable="false" property="state" label="状态" width="" />
+              <el-table-column :sortable="false" property="state" label="状态" width="" />
+              <el-table-column :sortable="false" property="state" label="状态" width="" />
+              <el-table-column :sortable="false" property="state" label="状态" width="" />
+              <el-table-column :sortable="false" property="state" label="状态" width="" />
+              <el-table-column :sortable="false" property="state" label="状态" width="" />
               <el-table-column label="操作" fixed="right">
                 <template #default="scope">
                   <el-button size="small" @click="log('编辑')">编辑</el-button>
@@ -203,13 +204,13 @@ const tableData = [
             </el-table>
           </div>
           <div class="demo-pagination-block">
-          <div class="demonstration">Total item count</div>
-          <el-pagination v-model:currentPage="currentPage" :page-size="100" :small="small" :disabled="disabled"
-            :background="background" layout="total, prev, pager, next" :total="1000" @size-change="handleSizeChange"
-            @current-change="handleCurrentChange" />
+            <div class="demonstration">Total item count</div>
+            <el-pagination v-model:currentPage="currentPage" :page-size="100" :small="small" :disabled="disabled"
+              :background="background" layout="total, prev, pager, next" :total="1000" @size-change="handleSizeChange"
+              @current-change="handleCurrentChange" />
+          </div>
         </div>
-        </div>
-        
+
       </div>
     </div>
   </div>
@@ -219,23 +220,19 @@ const tableData = [
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
+  // justify-content: space-between;
+  // height: 100%;
 }
 
 .table {
-        flex: 1;
-        position: relative;
-        /deep/.el-table {
-            position: absolute;
-        }
-    }
+  flex: 1;
+  // overflow: scroll;
+}
 
 .button-group {
   height: fit-content;
 }
 
-.demo-pagination-block {}
 
 .view {
   display: flex;
@@ -243,7 +240,7 @@ const tableData = [
 }
 
 .tree {
-  /* 指定盒子初始大小 */
+  /* 指定树形结构初始宽度 */
   flex-basis: 200px;
   margin-right: 15px;
 }
