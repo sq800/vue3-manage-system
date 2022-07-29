@@ -41,14 +41,10 @@ import { ref, isRef,reactive } from "vue"
   .layout-top {
     height: 50px;
   }
-
   .layout-bottom {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
-
-    
-
     .layout-b-right {
       padding: 15px 15px 15px 15px;
       flex-grow:1;

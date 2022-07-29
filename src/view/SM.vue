@@ -141,8 +141,9 @@ const tableData = [
       <el-tree :data="data" :props="defaultProps" :default-expand-all="true" :expand-on-click-node="false" />
       <div>></div>
     </div>
-    <div class="right flex">
-      <!-- 右侧数据功能区域  -->
+    <!-- 右侧数据区域 -->
+    <div class="right">
+      <!-- 数据筛选功能  -->
       <div class="search shadow-b">
         <span>
           登录名称：
@@ -169,6 +170,7 @@ const tableData = [
           <el-button type="primary" icon="Search">搜索</el-button>
         </span>
       </div>
+      <!-- 数据展示区域 -->
       <div class="content shadow-b">
         <div class="button-group">
           <el-button type="primary" icon="Plus" size="small">新增</el-button>
@@ -178,23 +180,23 @@ const tableData = [
         </div>
         <div class="container">
           <div class="table">
-            <el-table v-if="1 == 1" :data="tableData" :scrollbar-always-on="true" max-height="400px"
-            style="width: 100%;"  @selection-change="">
+            <el-table v-if="1 == 1" :data="tableData" max-height="300px" style="width: 100%;" @selection-change=""
+              :border="true">
               <el-table-column :sortable="false" fixed="left" type="selection" width="55" />
-              <el-table-column :sortable="true" label="日期" width="">
+              <el-table-column :sortable="true" label="日期" width="120">
                 <template #default="scope">{{ scope.row.date }}</template>
               </el-table-column>
-              <el-table-column :sortable="true" property="name" label="客户姓名" width="" />
-              <el-table-column :sortable="false" property="address" label="地址" width="" show-overflow-tooltip />
-              <el-table-column :sortable="false" property="cost" label="剩余费用" width="" />
-              <el-table-column :sortable="false" property="state" label="状态" width="" />
-              <el-table-column :sortable="false" property="state" label="状态" width="" />
-              <el-table-column :sortable="false" property="state" label="状态" width="" />
-              <el-table-column :sortable="false" property="state" label="状态" width="" />
-              <el-table-column :sortable="false" property="state" label="状态" width="" />
-              <el-table-column :sortable="false" property="state" label="状态" width="" />
-              <el-table-column :sortable="false" property="state" label="状态" width="" />
-              <el-table-column :sortable="false" property="state" label="状态" width="" />
+              <el-table-column :sortable="true" property="name" label="客户姓名" width="120" />
+              <el-table-column :sortable="false" property="address" label="地址" width="120" show-overflow-tooltip />
+              <el-table-column :sortable="false" property="cost" label="剩余费用" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
+              <el-table-column :sortable="false" property="state" label="状态" width="120" />
               <el-table-column label="操作" fixed="right">
                 <template #default="scope">
                   <el-button size="small" @click="log('编辑')">编辑</el-button>
@@ -203,6 +205,7 @@ const tableData = [
               </el-table-column>
             </el-table>
           </div>
+          <!-- 分页组件 -->
           <div class="demo-pagination-block">
             <div class="demonstration">Total item count</div>
             <el-pagination v-model:currentPage="currentPage" :page-size="100" :small="small" :disabled="disabled"
@@ -217,60 +220,46 @@ const tableData = [
 </template>
 
 <style scoped lang="less">
-.container {
-  display: flex;
-  flex-direction: column;
-  // justify-content: space-between;
-  // height: 100%;
-}
-
-.table {
-  flex: 1;
-  // overflow: scroll;
-}
-
-.button-group {
-  height: fit-content;
-}
-
-
 .view {
   display: flex;
   background-color: rgb(243, 202, 202);
-}
-
-.tree {
-  /* 指定树形结构初始宽度 */
-  flex-basis: 200px;
-  margin-right: 15px;
-}
-
-.right {
-  flex-grow: 1;
-  font-size: 14px;
-  flex-direction: column;
-  display: flex;
-}
-
-.search {
-  background-color: #fff;
-  margin-bottom: 15px;
-  padding: 10px;
-  border-radius: 5px;
-  display: flex;
-  flex-wrap: wrap;
+  .tree {
+    /* 指定树形结构初始宽度 */
+    flex-basis: 200px;
+    margin-right: 15px;
+  }
+  .right {
+    flex-grow: 1;
+    font-size: 14px;
+    flex-direction: column;
+    display: flex;
+    .search {
+      background-color: #fff;
+      margin-bottom: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .content {
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 5px;
+      flex-grow: 1;
+      height: 100px;
+      .container {
+        display: flex;
+        flex-direction: column;
+        .table {
+          width: 100%;
+        }
+      }
+    }
+  }
 }
 
 .shadow-b {
   box-shadow: 2px 2px 3px #A8ABB2;
-}
-
-.content {
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 5px;
-  flex-grow: 1;
-  height: 100px;
 }
 
 .w-50 {
