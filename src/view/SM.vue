@@ -246,13 +246,12 @@ const tableData = [
       background-color: #fff;
       border-radius: 5px;
       flex-grow: 1;
-      box-sizing: border-box;
       // height: 100px;
       .container {
         display: flex;
         flex-direction: column;
         .table {
-          box-sizing: border-box;
+          // width: 100%;
         }
       }
     }
