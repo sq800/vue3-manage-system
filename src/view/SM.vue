@@ -181,23 +181,23 @@ const tableData = [
         <div class="container">
           <div class="table">
             <el-table v-if="1 == 1" :data="tableData" max-height="300px" style="width: 100%;" @selection-change=""
-              :border="true">
-              <el-table-column :sortable="false" fixed="left" type="selection" width="55" />
-              <el-table-column :sortable="true" label="日期" width="120">
+              border>
+              <el-table-column fixed="left" type="selection" width="55" />
+              <el-table-column  label="日期" width="120">
                 <template #default="scope">{{ scope.row.date }}</template>
               </el-table-column>
-              <el-table-column :sortable="true" property="name" label="客户姓名" width="120" />
-              <el-table-column :sortable="false" property="address" label="地址" width="120" show-overflow-tooltip />
-              <el-table-column :sortable="false" property="cost" label="剩余费用" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column :sortable="false" property="state" label="状态" width="120" />
-              <el-table-column label="操作" fixed="right">
+              <el-table-column property="name" label="客户姓名" width="120" />
+              <el-table-column property="address" label="地址" width="120" show-overflow-tooltip />
+              <el-table-column property="cost" label="剩余费用" width="120" />
+              <el-table-column property="state" label="状态" width="120" />
+              <el-table-column property="state" label="状态" width="120" />
+              <el-table-column property="state" label="状态" width="120" />
+              <el-table-column property="state" label="状态" width="120" />
+              <el-table-column property="state" label="状态" width="120" />
+              <el-table-column property="state" label="状态" width="120" />
+              <el-table-column property="state" label="状态" width="120" />
+              <el-table-column property="state" label="状态" width="120" />
+              <el-table-column label="操作" fixed="right" width="120">
                 <template #default="scope">
                   <el-button size="small" @click="log('编辑')">编辑</el-button>
                   <el-button size="small" @click="log('删除')">删除</el-button>
@@ -222,7 +222,7 @@ const tableData = [
 <style scoped lang="less">
 .view {
   display: flex;
-  background-color: rgb(243, 202, 202);
+  // background-color: rgb(243, 202, 202);
   .tree {
     /* 指定树形结构初始宽度 */
     flex-basis: 200px;
@@ -246,12 +246,13 @@ const tableData = [
       background-color: #fff;
       border-radius: 5px;
       flex-grow: 1;
-      height: 100px;
+      box-sizing: border-box;
+      // height: 100px;
       .container {
         display: flex;
         flex-direction: column;
         .table {
-          width: 100%;
+          box-sizing: border-box;
         }
       }
     }
