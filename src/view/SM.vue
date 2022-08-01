@@ -183,7 +183,7 @@ const tableData = [
             <el-table v-if="1 == 1" :data="tableData" max-height="300px" style="width: 100%;" @selection-change=""
               border>
               <el-table-column fixed="left" type="selection" width="55" />
-              <el-table-column  label="日期" width="120">
+              <el-table-column label="日期" width="120">
                 <template #default="scope">{{ scope.row.date }}</template>
               </el-table-column>
               <el-table-column property="name" label="客户姓名" width="120" />
@@ -222,17 +222,21 @@ const tableData = [
 <style scoped lang="less">
 .view {
   display: flex;
+
   // background-color: rgb(243, 202, 202);
   .tree {
     /* 指定树形结构初始宽度 */
     flex-basis: 200px;
     margin-right: 15px;
   }
+
   .right {
     flex-grow: 1;
+    width: calc(100vw-100px);
     font-size: 14px;
     flex-direction: column;
     display: flex;
+
     .search {
       background-color: #fff;
       margin-bottom: 15px;
@@ -241,15 +245,18 @@ const tableData = [
       display: flex;
       flex-wrap: wrap;
     }
+
     .content {
       padding: 10px;
       background-color: #fff;
       border-radius: 5px;
       flex-grow: 1;
+
       // height: 100px;
       .container {
         display: flex;
         flex-direction: column;
+
         .table {
           // width: 100%;
         }

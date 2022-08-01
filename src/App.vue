@@ -4,22 +4,13 @@
 import Header from './components/Header.vue'
 import Menu from './components/Menu.vue';
 import Content from './components/Content.vue';
-import { ref, isRef,reactive } from "vue"
+import { ref, isRef, reactive } from "vue"
+import Layout from './layout.vue';
 
 </script>
 
 <template>
-  <div class="layout">
-    <Header class="layout-top"></Header>
-    <div class="layout-bottom">
-      <Menu class="layout-b-left"></Menu>
-      <div class="layout-b-right">
-        <Content></Content>
-      </div>
-    </div>
-  </div>
-
-
+  <Layout></Layout>
 </template>
 
 <style lang="less" scoped>
@@ -29,27 +20,5 @@ import { ref, isRef,reactive } from "vue"
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-
-.layout {
-  display: flex;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
-  flex-direction: column;
-
-  .layout-top {
-    height: 50px;
-  }
-  .layout-bottom {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    .layout-b-right {
-      padding: 15px 15px 15px 15px;
-      flex-grow:1;
-      background-color: #f3f3f4;
-    }
-  }
 }
 </style>
