@@ -4,7 +4,7 @@
 import Header from './components/Header.vue'
 import Menu from './components/Menu.vue';
 import Content from './components/Content.vue';
-import { ref, isRef,reactive } from "vue"
+import { ref, isRef, reactive } from "vue"
 
 </script>
 
@@ -34,21 +34,26 @@ import { ref, isRef,reactive } from "vue"
 .layout {
   display: flex;
   height: 100vh;
-  width: 100vw;
+  // width: 100vw;
   overflow: hidden;
   flex-direction: column;
+  background-color: #f3f3f4;
+
 
   .layout-top {
     height: 50px;
   }
+
   .layout-bottom {
     display: flex;
     flex-direction: row;
     flex-grow: 1;
+    
+
     .layout-b-right {
       padding: 15px 15px 15px 15px;
-      flex-grow:1;
-      background-color: #f3f3f4;
+      flex-grow: 1;
+      flex-shrink: 1;
     }
   }
 }

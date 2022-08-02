@@ -4,12 +4,12 @@
  * @Author       : sq800
  * @Date         : 2022/07/11
  * @LastEditors  : sq800
- * @LastEditTime : 2022/07/27
+ * @LastEditTime : 2022/08/01
  * @Copyright (c) 2022 by sq800, All Rights Reserved. 
  -->
 <template >
 
-<router-view v-slot="{ Component }" class="h100">
+<router-view v-slot="{ Component }" >
   <keep-alive>
     <component :is="Component" />
   </keep-alive>
@@ -18,6 +18,7 @@
 <script setup>
 
 </script>
+
 
 <style>
 .fff{

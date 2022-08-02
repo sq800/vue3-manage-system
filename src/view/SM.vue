@@ -230,6 +230,7 @@ const tableData = [
   }
   .right {
     flex-grow: 1;
+    flex-shrink: 1;
     font-size: 14px;
     flex-direction: column;
     display: flex;
