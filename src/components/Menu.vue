@@ -14,16 +14,15 @@
                     </template>
 
                     <template v-for="subItem in item.children">
-                            <el-sub-menu v-if="subItem.children" :index="subItem.name">
-                                <template #title><span>{{ subItem.title }}</span></template>
-                                <el-menu-item v-for="subSubItem in subItem.children"
-                                    :index="subSubItem.name">
-                                    <span>{{ subSubItem.title }}</span>
-                                </el-menu-item>
-                            </el-sub-menu>
-                            <el-menu-item v-else :index="subItem.name">
-                                <span>{{ subItem.title }}</span>
+                        <el-sub-menu v-if="subItem.children" :index="subItem.name">
+                            <template #title><span>{{ subItem.title }}</span></template>
+                            <el-menu-item v-for="subSubItem in subItem.children" :index="subSubItem.name">
+                                <span>{{ subSubItem.title }}</span>
                             </el-menu-item>
+                        </el-sub-menu>
+                        <el-menu-item v-else :index="subItem.name">
+                            <span>{{ subItem.title }}</span>
+                        </el-menu-item>
                     </template>
                 </el-sub-menu>
                 <!-- 一级菜单下的子栏目 -->
@@ -42,8 +41,8 @@
 </template>
 
 <script setup>
-import {useStore} from '../store/index'
-const store=useStore();
+import { useStore } from '../store/index'
+const store = useStore();
 console.log(store.isCollapse);
 // 开启菜单路由
 let isRoute = true;
@@ -52,7 +51,7 @@ const list = [
         // element+ 中菜单开启vue-router模式，会把元素的index作为path
         title: '单位组织',
         icon: 'House',
-        name:'UO',
+        name: 'UO',
         children: [
             {
                 title: '员工管理',
@@ -71,7 +70,7 @@ const list = [
     {
         title: '系统管理',
         icon: 'Setting',
-        name:"SYM",
+        name: "SYM",
         children: [
             {
                 title: '角色管理',
@@ -79,7 +78,7 @@ const list = [
             },
             {
                 title: '系统日志',
-                name:'SL',
+                name: 'SL',
                 children: [
                     {
                         title: '登录日志',
@@ -90,7 +89,7 @@ const list = [
     },
     {
         title: '待办',
-        name:'TODO',
+        name: 'TODO',
         icon: 'BellFilled',
 
     }
@@ -120,5 +119,7 @@ const handleClose = (key, keyPath) => {
 .sidebar-el-menu {
     width: 200px;
     height: 100%;
+    top:0px;
+    bottom:0px;
 }
 </style>

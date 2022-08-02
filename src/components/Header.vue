@@ -1,8 +1,7 @@
 <template>
-    <header class="navbar">
+    <div class="navbar">
         <div class="navbar-left">
             <span class="title">智能表计运营管理系统</span>
-
             <!-- 展开按钮，展开左侧菜单 -->
             <span class="collapse-btn" v-on:click="handleCollapse">
                 <el-icon v-if="store.isCollapse">
@@ -26,7 +25,7 @@
             <span class="role">管理员</span>
 
         </div>
-    </header>
+    </div>
 </template>
 
 <script setup>
@@ -83,7 +82,7 @@ function getCurrent() {
 
 // 展开/关闭处理函数
 function handleCollapse() {
-    store.isCollapse=!store.isCollapse
+    store.isCollapse = !store.isCollapse
 }
 let fullScreen = false;
 function handleFullScreen() {
@@ -110,65 +109,66 @@ function handleFullScreen() {
     fullScreen = !fullScreen
 }
 </script>
-<style lang="less">
+<style lang="less" scoped>
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    height: 50px;
+    // height: 50px;
     background-color: #337ecc;
     color: #fff;
     user-select: none;
-}
 
-.navbar-left {
-    display: flex;
-    line-height: 50px;
-    width: 260px;
-    justify-content: space-around;
-    align-content: center;
-}
+    .navbar-left {
+        display: flex;
+        line-height: 50px;
+        width: 260px;
+        justify-content: space-around;
+        align-content: center;
 
-.collapse-btn {
-    padding-top: 2px;
-    font-size: 22px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.navbar-right {
-    width: 430px;
-    /* line-height: 50px; */
-    /* margin-right: 10px; */
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-}
-
-.navbar-right>* {
-    cursor: pointer;
-    font-weight: 600;
-}
-
-.fullScreen {
-    border: none;
-    background-color: transparent;
-    color: #fff;
-    font: inherit;
-}
-
-.fullScreen>span {
-    font-weight: 600;
-
-    i {
-        position: relative;
-        left: 0px;
-        top: 2px;
+        .collapse-btn {
+            padding-top: 2px;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+        }
     }
-}
 
-.role {
-    width: 60px;
+    .navbar-right {
+        width: 430px;
+        line-height: 50px;
+        margin-right: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        * {
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .fullScreen {
+            border: none;
+            background-color: transparent;
+            color: #fff;
+            font: inherit;
+
+            span {
+                font-weight: 600;
+
+                i {
+                    position: relative;
+                    left: 0px;
+                    top: 2px;
+                }
+            }
+        }
+
+        .role {
+            width: 60px;
+        }
+
+    }
 }
 </style>
