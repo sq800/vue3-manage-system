@@ -142,10 +142,19 @@ function handleFullScreen() {
         display: flex;
         justify-content: space-around;
         align-items: center;
-
+        @media (max-width:800px){
+            width: 200px;
+        }
         * {
             cursor: pointer;
             font-weight: 600;
+        }
+
+        .time {
+            @media (max-width:800px) {
+                display: none;
+                // visibility: hidden;
+            }
         }
 
         .fullScreen {

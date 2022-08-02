@@ -1,7 +1,16 @@
 <script setup>
 import { reactive, ref } from 'vue';
 import IconText from "../components/IconText.vue";
-const data = [
+import Tree from '../components/DepartmentTree.vue';
+let data=ref([])
+fetch("../src/assets/department.json")
+.then(res=>res.json())
+.then(res=>{
+  data.value=res
+ 
+})
+ console.log(data)
+const dataq = [
   {
     label: 'Level one 1',
     children: [
@@ -62,6 +71,11 @@ let currentPage = ref(1)
 const defaultProps = {
   children: 'children',
   label: 'label',
+}
+function handleBtn(){
+  let flag= true
+  let tree=document.querySelector(".tree-main")
+  tree.style.width="0px"
 }
 let log = (v) => {
   console.log(v)
@@ -136,11 +150,7 @@ const tableData = [
 <template>
   <div class="view">
     <!-- 左侧树形结构 -->
-    <div class="tree">
-      <div class="fff">组织机构</div>
-      <el-tree :data="data" :props="defaultProps" :default-expand-all="true" :expand-on-click-node="false" />
-      <div>></div>
-    </div>
+    <Tree :data="data"></Tree>
     <!-- 右侧数据区域 -->
     <div class="right">
       <!-- 数据筛选功能  -->
@@ -154,7 +164,7 @@ const tableData = [
           <el-input class="w-50" v-model="searchObj.phone" placeholder="" clearable />
         </span>
         <span>
-          用户状态：
+          <span>用户状态：</span>
           <el-select v-model="searchObj.status" clearable placeholder="Select">
             <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value" />
           </el-select>
@@ -208,9 +218,8 @@ const tableData = [
           <!-- 分页组件 -->
           <div class="demo-pagination-block">
             <div class="demonstration">Total item count</div>
-            <el-pagination v-model:currentPage="currentPage" :page-size="100" :small="small" :disabled="disabled"
-              :background="background" layout="total, prev, pager, next" :total="1000" @size-change="handleSizeChange"
-              @current-change="handleCurrentChange" />
+            <el-pagination 
+              layout="total, prev, pager, next" :total="1000"  />
           </div>
         </div>
 
@@ -227,11 +236,26 @@ const tableData = [
   .tree {
     /* 指定树形结构初始宽度 */
     flex-basis: 200px;
-    margin-right: 15px;
+    margin-right: 5px;
+    position: relative;
+    .tree-main {
+      width: 200px;
+    }
+
+    .btn {
+      background-color: #7397eb;
+      position: absolute;
+      top: 200px;
+      right: -10px;
+      cursor: pointer;
+      user-select: none;
+    }
   }
 
   .right {
     flex-grow: 1;
+    flex-basis: auto;
+    overflow: auto;
     width: calc(100vw-100px);
     font-size: 14px;
     flex-direction: column;
@@ -258,7 +282,7 @@ const tableData = [
         flex-direction: column;
 
         .table {
-          // width: 100%;
+          width: 100%;
         }
       }
     }
@@ -275,6 +299,6 @@ const tableData = [
 
 .fff {
   font-weight: bold;
-  color: #fff;
+  // color: rgb(0, 0, 0);
 }
 </style>

@@ -13,10 +13,15 @@ import PM from './view/PM.vue';
       </el-header>
       <el-container>
         <el-aside width="200px" class="aside">
-            <Menu></Menu>
+          <Menu></Menu>
         </el-aside>
         <el-main class="main">
-            <PM></PM>
+          <router-view v-slot="{ Component }" class="content">
+            <keep-alive>
+              <component :is="Component" />
+            </keep-alive>
+          </router-view>
+
         </el-main>
       </el-container>
     </el-container>
@@ -24,25 +29,33 @@ import PM from './view/PM.vue';
 </template>
 
 <style lang="less" scoped>
-    *{
-        padding: 0;
+* {
+  padding: 0;
+}
+
+#layout {
+  background-color: rgb(193, 193, 193);
+  min-height: 100vh;
+
+  .header {
+    height: 50px;
+    padding: 0;
+    background-color: rgb(148, 148, 148);
+    display: flex;
+  }
+
+  .aside {
+    height: calc(100vh - 50px);
+    width: max-content;
+    background-color: #ffffff;
+  }
+
+  .main {
+    background-color: rgb(204, 229, 220);
+    height: calc(100vh - 50px);
+    .content{
+      background-color: #ffffff;
     }
-    #layout{
-        background-color: rgb(193, 193, 193);
-        min-height: 100vh;
-        .header{
-            height: 50px;
-            padding: 0;
-            background-color: rgb(148, 148, 148);
-            display: flex;
-        }
-        .aside{
-            height: calc(100vh - 50px);
-            width: max-content;
-            background-color: #dc2e2e;
-        }
-        .main{
-            background-color: rgb(204, 229, 220);
-        }
-    }
+  }
+}
 </style>

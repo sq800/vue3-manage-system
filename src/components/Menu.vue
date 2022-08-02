@@ -41,6 +41,7 @@
 </template>
 
 <script setup>
+import { onMounted,watchEffect } from 'vue';
 import { useStore } from '../store/index'
 const store = useStore();
 console.log(store.isCollapse);
@@ -106,6 +107,27 @@ const handleOpen = (key, keyPath) => {
 const handleClose = (key, keyPath) => {
     console.log(key, keyPath)
 }
+// 若浏览器尺寸过小，收起菜单
+window.onresize = () => {
+    let navWidth = document.querySelector('body').offsetWidth
+    if (navWidth <= 800) {
+        store.isCollapse=true
+    }
+    else {
+        store.isCollapse=false
+    }
+}
+onMounted(() => {
+    watchEffect(() => {
+        let navWidth = document.querySelector('body').offsetWidth
+        if (navWidth <= 800) {
+            store.isCollapse=true
+        }
+        else {
+            store.isCollapse=false
+        }
+    }, { flush: 'post' })
+})
 // // 注册
 // const emit = defineEmits(["menuClick"]);
 // // 菜单子项点击事件函数

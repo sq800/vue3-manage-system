@@ -1,0 +1,34 @@
+[
+    {
+        "label": "水务集团",
+        "children": [
+            {
+                "label": "南京分公司",
+                "children": [
+                    {
+                        "label": "测试部门"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "label": "芯创集团",
+        "children": [
+            {
+                "label": "杭州水务一部",
+                "children": [
+                    {
+                        "label": "Test"
+                    },
+                    {
+                        "label": "收费组"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "label":"金泉集团"
+    }
+]
