@@ -36,6 +36,7 @@ import PM from './view/PM.vue';
 #layout {
   background-color: rgb(193, 193, 193);
   min-height: 100vh;
+  min-width: 600px;
 
   .header {
     height: 50px;
@@ -53,9 +54,7 @@ import PM from './view/PM.vue';
   .main {
     background-color: rgb(204, 229, 220);
     height: calc(100vh - 50px);
-    .content{
-      background-color: #ffffff;
-    }
+    
   }
 }
 </style>

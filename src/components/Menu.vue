@@ -44,7 +44,6 @@
 import { onMounted,watchEffect } from 'vue';
 import { useStore } from '../store/index'
 const store = useStore();
-console.log(store.isCollapse);
 // 开启菜单路由
 let isRoute = true;
 const list = [
