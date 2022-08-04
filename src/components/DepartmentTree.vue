@@ -31,7 +31,7 @@ function treeClose() {
         <div class="collapseBtn" @click="treeClose">{{treeClass.treeClose ? ">":"<" }}</div>
     </div>
 </template>
-<style>
+<style scoped>
 .treeBox {
     /* width: 200px; */
     display: flex;
@@ -40,7 +40,7 @@ function treeClose() {
 }
 
 .tree {
-    width: 200px;
+    width: 150px;
     padding: 3px;
 }
 
@@ -51,7 +51,8 @@ function treeClose() {
 
 .collapseBtn {
     height: 100%;
-    background-color: rgb(224, 255, 245);
+    background-color: rgb(220, 220, 220);
     align-items: center;
+    display: flex;
 }
 </style>
