@@ -98,11 +98,15 @@ let tableFilterData = ref([])
 watchEffect(() => {
   console.log(currentPage.value)
   tableFilterData.value = tableData.slice(
-    (currentPage.value - 1) * pageSize.value , 
+    (currentPage.value - 1) * pageSize.value,
     currentPage.value * pageSize.value)
 
 })
-function add(){
+// 新增 对话框是否可见
+let addDialogVisible = ref(false)
+
+function add() {
+  addDialogVisible.value = true
   
 }
 </script>
@@ -119,7 +123,7 @@ function add(){
       <div class="content">
         <div class="button-group">
           <el-button type="primary" icon="Plus" @click="add">新增</el-button>
-          <el-button type="success" icon="Edit" >修改</el-button>
+          <el-button type="success" icon="Edit">修改</el-button>
           <el-button type="danger" icon="SemiSelect">删除</el-button>
           <el-button type="warning" icon="Download">导出</el-button>
         </div>
@@ -152,8 +156,8 @@ function add(){
           <!-- 分页组件 -->
           <div class="demo-pagination-block">
             <div class="demonstration">数据总数</div>
-            <el-pagination layout="total, prev, pager, next, jumper" :page-size="pageSize" 
-              :total="tableData.length" v-model:currentPage="currentPage" />
+            <el-pagination layout="total, prev, pager, next, jumper" :page-size="pageSize" :total="tableData.length"
+              v-model:currentPage="currentPage" />
           </div>
         </div>
       </div>
